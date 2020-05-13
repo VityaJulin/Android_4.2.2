@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private FloatingActionButton floatingActionButton;
     private ItemsDataAdapter adapter;
     private List<Drawable> images = new ArrayList<>();
-    private TextView title = findViewById(R.id.title);
+    //private TextView title = findViewById(R.id.title);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,13 +56,13 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_text_small:
-                title.setTextSize(14);
+                //title.setTextSize(14);
                 return true;
             case R.id.menu_text_medium:
-                title.setTextSize(18);
+                //title.setTextSize(18);
                 return true;
             case R.id.menu_text_large:
-                title.setTextSize(24);
+                //title.setTextSize(24);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
