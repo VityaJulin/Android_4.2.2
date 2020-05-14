@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -110,7 +111,7 @@ public class ItemsDataAdapter extends BaseAdapter {
     // Если нет чего переиспользовать, то создается новый View.
     // А потом напоняет старую или новую View нужными данными.
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         View view = convertView;
         if (view == null) {
             view = inflater.inflate(R.layout.item_list_view, parent, false);
@@ -121,10 +122,17 @@ public class ItemsDataAdapter extends BaseAdapter {
         ImageView image = view.findViewById(R.id.icon);
         TextView title = view.findViewById(R.id.title);
         TextView subtitle = view.findViewById(R.id.subtitle);
+        Button delete = view.findViewById(R.id.btn_delete);
 
         image.setImageDrawable(itemData.getImage());
         title.setText(itemData.getTitle());
         subtitle.setText(itemData.getSubtitle());
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                removeItem(position);
+            }
+        });
 
         return view;
     }

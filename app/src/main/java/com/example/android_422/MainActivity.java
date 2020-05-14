@@ -1,13 +1,14 @@
 package com.example.android_422;
 
-import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
-import android.app.Activity;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -29,11 +30,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         bar = (BottomAppBar) findViewById(R.id.bar);
-        setSupportActionBar(bar);
         floatingActionButton = (FloatingActionButton) findViewById(R.id.fab);
         ListView listView = findViewById(R.id.listView);
-        fillImages();
+
         ItemsDataAdapter.onActivityCreateSetTheme(this);
+        setSupportActionBar(bar);
+        fillImages();
+
+        adapter = new ItemsDataAdapter(this, null);
+        listView.setAdapter(adapter);
 
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,8 +47,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        adapter = new ItemsDataAdapter(this, null);
-        listView.setAdapter(adapter);
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                showItemData(position);
+                return true;
+            }
+        });
     }
 
     @Override
@@ -82,5 +92,11 @@ public class MainActivity extends AppCompatActivity {
                 "It\'s me " + adapter.getCount()));
     }
 
+    private void showItemData(int position) {
+        ItemData itemData = adapter.getItem(position);
+        Toast.makeText(MainActivity.this,
+                itemData.getTitle(),
+                Toast.LENGTH_SHORT).show();
+    }
 }
 
