@@ -1,13 +1,13 @@
 package com.example.android_422;
 
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
-import android.widget.TextView;
-
+import android.app.Activity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -23,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
     private FloatingActionButton floatingActionButton;
     private ItemsDataAdapter adapter;
     private List<Drawable> images = new ArrayList<>();
-    //private TextView title = findViewById(R.id.title);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         floatingActionButton = (FloatingActionButton) findViewById(R.id.fab);
         ListView listView = findViewById(R.id.listView);
         fillImages();
+        ItemsDataAdapter.onActivityCreateSetTheme(this);
 
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,13 +56,13 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_text_small:
-                //title.setTextSize(14);
+                ItemsDataAdapter.changeToTheme(MainActivity.this, ItemsDataAdapter.TEXT_SIZE_SMALL);
                 return true;
             case R.id.menu_text_medium:
-                //title.setTextSize(18);
+                ItemsDataAdapter.changeToTheme(MainActivity.this, ItemsDataAdapter.TEXT_SIZE_MEDIUM);
                 return true;
             case R.id.menu_text_large:
-                //title.setTextSize(24);
+                ItemsDataAdapter.changeToTheme(MainActivity.this, ItemsDataAdapter.TEXT_SIZE_LARGE);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

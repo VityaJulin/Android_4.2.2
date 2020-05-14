@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/item_list_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:descendantFocusability="blocksDescendants"
@@ -14,10 +15,11 @@
         android:layout_gravity="center_vertical"
         android:layout_margin="8dp"
         android:scaleType="centerCrop"
+        tools:ignore="ContentDescription"
         tools:src="@mipmap/ic_launcher" />
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:orientation="vertical">
@@ -26,8 +28,8 @@
             android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:singleLine="true"
             android:ellipsize="end"
+            android:singleLine="true"
             tools:text="Title Example" />
 
         <TextView

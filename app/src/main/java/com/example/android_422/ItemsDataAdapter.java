@@ -1,6 +1,8 @@
 package com.example.android_422;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +21,11 @@ public class ItemsDataAdapter extends BaseAdapter {
     // Хранит список всех элементов списка
     private List<ItemData> items;
 
+    private static int sTheme;
+    public final static int TEXT_SIZE_SMALL = 0;
+    public final static int TEXT_SIZE_MEDIUM = 1;
+    public final static int TEXT_SIZE_LARGE = 2;
+
     // LayoutInflater – класс, который из
     // layout-файла создает View-элемент.
     private LayoutInflater inflater;
@@ -32,6 +39,27 @@ public class ItemsDataAdapter extends BaseAdapter {
             this.items = items;
         }
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    }
+
+    public static void changeToTheme(Activity activity, int theme) {
+        sTheme = theme;
+        activity.startActivity(new Intent(activity, activity.getClass()));
+    }
+
+    public static void onActivityCreateSetTheme(Activity activity) {
+        switch (sTheme) {
+            default:
+                activity.setTheme(R.style.AppTheme);
+                break;
+            case TEXT_SIZE_SMALL:
+                activity.setTheme(R.style.AppTheme);
+                break;
+            case TEXT_SIZE_MEDIUM:
+                activity.setTheme(R.style.AppTheme_medium_text_size);
+                break;
+            case TEXT_SIZE_LARGE:
+                activity.setTheme(R.style.AppTheme_large_text_size);
+        }
     }
 
     // Добавляет элемент в конец списка.
